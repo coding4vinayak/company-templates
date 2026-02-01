@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Premium Website Templates - 6 stunning designs for Agency, SaaS, E-commerce, Brand Shop, Landing Pages, and Products.">
+    <title>Abetworks Premium Templates | Choose Your Design</title>
+
+    <!-- Optimize Font Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="shared/base.css">
+
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --text-white: #ffffff;
+            --text-muted: #9ca3af;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-white);
+            min-height: 100vh;
+            /* Prevent horizontal scroll */
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg-effects {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            /* Optimization: reduce painting area */
+            transform: translateZ(0);
+        }
+
+        .bg-orb {
+            position: absolute;
+            will-change: transform;
+            /* Performance: Removed heavy filter: blur(80px) */
+        }
+
+        .bg-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.4) 0%, rgba(102, 126, 234, 0) 70%);
+            top: -200px;
+            left: -150px;
+        }
+
+        .bg-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 206, 201, 0.3) 0%, rgba(0, 206, 201, 0) 70%);
+            bottom: -150px;
+            right: -100px;
+        }
+
+        .bg-orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(225, 112, 85, 0.25) 0%, rgba(225, 112, 85, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 80px 20px 60px;
+        }
+
+        .header-badge {
+            display: inline-block;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(0, 206, 201, 0.2));
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #00CEC9;
+            margin-bottom: 24px;
+        }
+
+        .header-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #667EEA, #00CEC9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* Fallback for non-webkit */
+            color: #667EEA;
+        }
+
+        .header-description {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Templates Grid */
+        .templates-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 100px;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        /* Template Card */
+        .template-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Optimized transition */
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            will-change: transform;
+        }
+
+        .template-card:hover {
+            transform: translateY(-8px);
+            /* Reduced movement */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .template-preview {
+            position: relative;
+            background: #16213e;
+            /* Solid background while loading */
+            width: 100%;
+            aspect-ratio: 600/380;
+            /* Prevent CLS */
+        }
+
+        .template-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            opacity: 0;
+            /* Fade in on load */
+            animation: fadeInImg 0.5s ease forwards;
+        }
+
+        @keyframes fadeInImg {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .template-card:hover .template-preview img {
+            transform: scale(1.05);
+            /* Reduced scale */
+        }
+
+        .template-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .template-card:hover .template-overlay {
+            opacity: 1;
+        }
+
+        .preview-btn {
+            padding: 12px 28px;
+            background: white;
+            color: #0a0e17;
+            font-weight: 600;
+            border-radius: 50px;
+            font-size: 14px;
+            transform: translateY(10px);
+            transition: transform 0.3s;
+        }
+
+        .template-card:hover .preview-btn {
+            transform: translateY(0);
+        }
+
+        .template-info {
+            padding: 24px;
+        }
+
+        .template-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .template-description {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .template-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .template-tag {
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Color indicators - Optimized with simple colors */
+        .template-card[data-theme="agency"] .template-name {
+            color: #A29BFE;
+        }
+
+        .template-card[data-theme="saas"] .template-name {
+            color: #00F260;
+        }
+
+        .template-card[data-theme="ecommerce"] .template-name {
+            color: #00B894;
+        }
+
+        .template-card[data-theme="brand"] .template-name {
+            color: #D4A5AC;
+        }
+
+        .template-card[data-theme="landing"] .template-name {
+            color: #FDCB6E;
+        }
+
+        .template-card[data-theme="product"] .template-name {
+            color: #00CEC9;
+        }
+
+        /* Hover states - Optimized shadows */
+        .template-card[data-theme="agency"]:hover {
+            box-shadow: 0 20px 50px rgba(108, 92, 231, 0.15);
+        }
+
+        .template-card[data-theme="saas"]:hover {
+            box-shadow: 0 20px 50px rgba(0, 242, 96, 0.1);
+        }
+
+        .template-card[data-theme="ecommerce"]:hover {
+            box-shadow: 0 20px 50px rgba(9, 132, 227, 0.15);
+        }
+
+        .template-card[data-theme="brand"]:hover {
+            box-shadow: 0 20px 50px rgba(183, 110, 121, 0.15);
+        }
+
+        .template-card[data-theme="landing"]:hover {
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.15);
+        }
+
+        .template-card[data-theme="product"]:hover {
+            box-shadow: 0 20px 50px rgba(0, 206, 201, 0.15);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .footer-text a {
+            color: #00CEC9;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .templates-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .templates-section {
+                padding: 0 20px 60px;
+            }
+
+            /* Disable heavy glass effects on mobile template cards */
+            .template-card {
+                background: #121826;
+                /* Solid color fallback */
+                backdrop-filter: none;
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .template-card:hover {
+                transform: none;
+            }
+
+            .template-card:hover .template-preview img {
+                transform: none;
+            }
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 100px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .pricing-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .pricing-card.featured {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .pricing-tier {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .pricing-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .pricing-price span {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin: 30px 0;
+            color: var(--text-muted);
+        }
+
+        .pricing-features li {
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            color: #00CEC9;
+            position: absolute;
+            left: 0;
+        }
+
+        .pricing-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .pricing-card.featured .pricing-btn {
+            background: #667EEA;
+            border-color: #667EEA;
+        }
+
+        .pricing-btn:hover {
+            background: white;
+            color: #000;
+        }
+
+        /* Add-ons Grid */
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .addon-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .addon-icon {
+            font-size: 24px;
+        }
+
+        .addon-info h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+
+        .addon-info p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-card.featured {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-effects">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+    </div>
+
+    <!-- Navigation Bar with Branding -->
+    <nav class="navbar"
+        style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(10, 14, 23, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="logo" style="display: flex; align-items: center; gap: 12px;">
+            <div
+                style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea, #00CEC9); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
+                A</div>
+            <h1
+                style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; margin: 0; background: linear-gradient(135deg, #667EEA, #00CEC9); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                AbetWorks</h1>
+        </div>
+        <div class="nav-links" style="display: flex; gap: 30px;">
+            <a href="#" style="color: var(--text-muted); transition: color 0.3s; text-decoration: none;">Home</a>
+            <a href="#services"
+                style="color: var(--text-muted); transition: color 0.3s; text-decoration: none;">Services</a>
+            <a href="#pricing"
+                style="color: var(--text-muted); transition: color 0.3s; text-decoration: none;">Packages</a>
+            <a href="#contact"
+                style="color: var(--text-muted); transition: color 0.3s; text-decoration: none;">Contact</a>
+        </div>
+    </nav>
+
+    <div class="main-content" style="padding-top: 100px;">
+        <header class="header">
+            <span class="header-badge">✨ 6 Premium Templates</span>
+            <h1 class="header-title">Choose Your Template</h1>
+            <p class="header-description">Stunning, animated website templates with WOW factor. Click any template to
+                preview.</p>
+        </header>
+
+        <!-- AbetWorks Branding Section -->
+        <section class="branding-section">
+            <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+                <div class="branding-content"
+                    style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px; text-align: center; margin-bottom: 60px;">
+                    <h2 class="section-title"
+                        style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; margin-bottom: 20px; background: linear-gradient(135deg, #fff, #a5b4fc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                        About AbetWorks</h2>
+                    <p class="branding-description"
+                        style="font-size: 18px; color: var(--text-muted); max-width: 800px; margin: 0 auto 30px; line-height: 1.7;">
+                        We are a premier digital solutions provider specializing in creating stunning, high-performance
+                        websites and applications.
+                        Our mission is to empower businesses with cutting-edge technology and exceptional design.
+                    </p>
+                    <div class="brand-values"
+                        style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px;">
+                        <div class="value-item" style="text-align: center; max-width: 250px;">
+                            <div class="value-icon" style="font-size: 40px; margin-bottom: 15px;">🚀</div>
+                            <h3 style="color: #00CEC9; margin-bottom: 10px; font-size: 20px;">Innovation</h3>
+                            <p style="color: var(--text-muted); font-size: 14px;">Cutting-edge solutions tailored to
+                                your business needs</p>
+                        </div>
+                        <div class="value-item" style="text-align: center; max-width: 250px;">
+                            <div class="value-icon" style="font-size: 40px; margin-bottom: 15px;">🎨</div>
+                            <h3 style="color: #00CEC9; margin-bottom: 10px; font-size: 20px;">Design Excellence</h3>
+                            <p style="color: var(--text-muted); font-size: 14px;">Beautiful interfaces that captivate
+                                and engage users</p>
+                        </div>
+                        <div class="value-item" style="text-align: center; max-width: 250px;">
+                            <div class="value-icon" style="font-size: 40px; margin-bottom: 15px;">⚡</div>
+                            <h3 style="color: #00CEC9; margin-bottom: 10px; font-size: 20px;">Performance</h3>
+                            <p style="color: var(--text-muted); font-size: 14px;">Optimized solutions that deliver
+                                exceptional speed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services-section" id="services">
+            <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 40px 100px;">
+                <h2 class="section-title"
+                    style="text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 36px; margin-bottom: 50px; background: linear-gradient(135deg, #fff, #a5b4fc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                    Our Digital Solutions</h2>
+
+                <div class="services-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div class="service-card"
+                        style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; transition: transform 0.3s; position: relative; text-align: center;">
+                        <div class="service-icon" style="font-size: 48px; margin-bottom: 20px;">💻</div>
+                        <h3 class="service-title"
+                            style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; margin-bottom: 15px; color: #A29BFE;">
+                            Web Development</h3>
+                        <p class="service-description" style="color: var(--text-muted); margin-bottom: 20px;">Custom
+                            websites and web applications built with modern technologies for optimal performance and
+                            user experience.</p>
+                        <ul class="service-features"
+                            style="list-style: none; text-align: left; margin: 20px 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">Responsive Design
+                            </li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">SEO Optimized</li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">Fast Loading</li>
+                            <li style="padding-left: 24px; position: relative;">Cross-browser Compatible</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card"
+                        style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; transition: transform 0.3s; position: relative; text-align: center;">
+                        <div class="service-icon" style="font-size: 48px; margin-bottom: 20px;">📱</div>
+                        <h3 class="service-title"
+                            style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; margin-bottom: 15px; color: #00F260;">
+                            Mobile Apps</h3>
+                        <p class="service-description" style="color: var(--text-muted); margin-bottom: 20px;">Native and
+                            cross-platform mobile applications designed to engage users and drive business growth.</p>
+                        <ul class="service-features"
+                            style="list-style: none; text-align: left; margin: 20px 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">iOS & Android</li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">UI/UX Design</li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">App Store
+                                Optimization</li>
+                            <li style="padding-left: 24px; position: relative;">Ongoing Support</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card"
+                        style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; transition: transform 0.3s; position: relative; text-align: center;">
+                        <div class="service-icon" style="font-size: 48px; margin-bottom: 20px;">🎨</div>
+                        <h3 class="service-title"
+                            style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; margin-bottom: 15px; color: #00B894;">
+                            Design & Branding</h3>
+                        <p class="service-description" style="color: var(--text-muted); margin-bottom: 20px;">
+                            Comprehensive design solutions that establish strong brand identity and visual appeal.</p>
+                        <ul class="service-features"
+                            style="list-style: none; text-align: left; margin: 20px 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">Logo Design</li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">UI/UX Design</li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">Brand Identity</li>
+                            <li style="padding-left: 24px; position: relative;">Marketing Materials</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="services-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px;">
+                    <div class="service-card"
+                        style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; transition: transform 0.3s; position: relative; text-align: center;">
+                        <div class="service-icon" style="font-size: 48px; margin-bottom: 20px;">📈</div>
+                        <h3 class="service-title"
+                            style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; margin-bottom: 15px; color: #D4A5AC;">
+                            Digital Marketing</h3>
+                        <p class="service-description" style="color: var(--text-muted); margin-bottom: 20px;">Strategic
+                            marketing campaigns that increase visibility, engagement, and conversions.</p>
+                        <ul class="service-features"
+                            style="list-style: none; text-align: left; margin: 20px 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">SEO/SEM</li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">Social Media</li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">Email Marketing
+                            </li>
+                            <li style="padding-left: 24px; position: relative;">Analytics & Reporting</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card"
+                        style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; transition: transform 0.3s; position: relative; text-align: center;">
+                        <div class="service-icon" style="font-size: 48px; margin-bottom: 20px;">⚙️</div>
+                        <h3 class="service-title"
+                            style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; margin-bottom: 15px; color: #FDCB6E;">
+                            E-commerce Solutions</h3>
+                        <p class="service-description" style="color: var(--text-muted); margin-bottom: 20px;">Complete
+                            online store solutions with secure payment processing and inventory management.</p>
+                        <ul class="service-features"
+                            style="list-style: none; text-align: left; margin: 20px 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">Shopify Stores</li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">Payment Gateways
+                            </li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">Inventory Mgmt</li>
+                            <li style="padding-left: 24px; position: relative;">Order Processing</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card"
+                        style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; transition: transform 0.3s; position: relative; text-align: center;">
+                        <div class="service-icon" style="font-size: 48px; margin-bottom: 20px;">🔒</div>
+                        <h3 class="service-title"
+                            style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; margin-bottom: 15px; color: #00CEC9;">
+                            Cloud & DevOps</h3>
+                        <p class="service-description" style="color: var(--text-muted); margin-bottom: 20px;">Scalable
+                            cloud infrastructure and DevOps practices for reliable, secure deployments.</p>
+                        <ul class="service-features"
+                            style="list-style: none; text-align: left; margin: 20px 0; color: var(--text-muted);">
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">AWS/Azure/GCP</li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">CI/CD Pipelines
+                            </li>
+                            <li style="margin-bottom: 10px; padding-left: 24px; position: relative;">Containerization
+                            </li>
+                            <li style="padding-left: 24px; position: relative;">Monitoring & Security</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="templates-section">
+            <div class="templates-grid">
+
+                <a href="agency/index.html" class="template-card" data-theme="agency">
+                    <div class="template-preview">
+                        <!-- LCP Optimization: High priority, eager loading for first item -->
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=380&fit=crop"
+                            alt="Agency Template" width="600" height="380" fetchpriority="high">
+                        <div class="template-overlay">
+                            <span class="preview-btn">View Template →</span>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Agency</h3>
+                        <p class="template-description">Creative agency template with purple/coral theme. Perfect for
+                            design studios and marketing agencies.</p>
+                        <div class="template-tags">
+                            <span class="template-tag">Portfolio</span>
+                            <span class="template-tag">Services</span>
+                            <span class="template-tag">Pricing</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="saas/index.html" class="template-card" data-theme="saas">
+                    <div class="template-preview">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=380&fit=crop"
+                            alt="SaaS Template" width="600" height="380" loading="lazy">
+                        <div class="template-overlay">
+                            <span class="preview-btn">View Template →</span>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">SaaS Platform</h3>
+                        <p class="template-description">Midnight blue/neon green theme with animated dashboard mockup.
+                            Ideal for software products.</p>
+                        <div class="template-tags">
+                            <span class="template-tag">Dashboard</span>
+                            <span class="template-tag">Pricing Toggle</span>
+                            <span class="template-tag">Features</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="ecommerce/index.html" class="template-card" data-theme="ecommerce">
+                    <div class="template-preview">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=380&fit=crop"
+                            alt="E-commerce Template" width="600" height="380" loading="lazy">
+                        <div class="template-overlay">
+                            <span class="preview-btn">View Template →</span>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">E-commerce</h3>
+                        <p class="template-description">Electric blue/mint theme with product cards and cart animations.
+                            Great for online stores.</p>
+                        <div class="template-tags">
+                            <span class="template-tag">Products</span>
+                            <span class="template-tag">Categories</span>
+                            <span class="template-tag">Cart</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="brand-shop/index.html" class="template-card" data-theme="brand">
+                    <div class="template-preview">
+                        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&h=380&fit=crop"
+                            alt="Brand Shop Template" width="600" height="380" loading="lazy">
+                        <div class="template-overlay">
+                            <span class="preview-btn">View Template →</span>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Luxury Brand</h3>
+                        <p class="template-description">Rose gold/cream luxury theme with elegant typography. Perfect
+                            for premium fashion brands.</p>
+                        <div class="template-tags">
+                            <span class="template-tag">Luxury</span>
+                            <span class="template-tag">Fashion</span>
+                            <span class="template-tag">Minimal</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="landing-pack/index.html" class="template-card" data-theme="landing">
+                    <div class="template-preview">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=380&fit=crop"
+                            alt="Landing Pack Template" width="600" height="380" loading="lazy">
+                        <div class="template-overlay">
+                            <span class="preview-btn">View Template →</span>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Landing Pack</h3>
+                        <p class="template-description">Gradient purple/gold theme with email capture form.
+                            High-converting lead generation pages.</p>
+                        <div class="template-tags">
+                            <span class="template-tag">Lead Gen</span>
+                            <span class="template-tag">Testimonials</span>
+                            <span class="template-tag">CTA</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="product/index.html" class="template-card" data-theme="product">
+                    <div class="template-preview">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=380&fit=crop"
+                            alt="Product Template" width="600" height="380" loading="lazy">
+                        <div class="template-overlay">
+                            <span class="preview-btn">View Template →</span>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3 class="template-name">Product Launch</h3>
+                        <p class="template-description">Teal/sunset theme with parallax product mockup. Ideal for app
+                            and product launches.</p>
+                        <div class="template-tags">
+                            <span class="template-tag">App</span>
+                            <span class="template-tag">Mockup</span>
+                            <span class="template-tag">Pricing</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing-section">
+            <h2 class="section-title">Complete Digital Packages</h2>
+
+            <div class="pricing-grid">
+                <!-- Tier 1 -->
+                <div class="pricing-card">
+                    <span class="pricing-tier">Launchpad</span>
+                    <div class="pricing-price">₹14,999<span>+GST</span></div>
+                    <ul class="pricing-features">
+                        <li>Premium Template Selection</li>
+                        <li>Content Upload (Text/Images)</li>
+                        <li>Contact Form Setup</li>
+                        <li>Mobile Optimized</li>
+                        <li>Hosting Setup</li>
+                        <li>3-5 Days Delivery</li>
+                    </ul>
+                    <a href="https://wa.me/918850777453?text=Interested%20in%20Launchpad%20Package"
+                        class="pricing-btn">Get Started</a>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="pricing-card featured">
+                    <span class="pricing-tier">Growth Engine</span>
+                    <div class="pricing-price">₹29,999<span>+GST</span></div>
+                    <ul class="pricing-features">
+                        <li><strong>Everything in Launchpad</strong></li>
+                        <li>Custom Branding (Colors/Fonts)</li>
+                        <li>SEO Setup (GMB, Meta Tags)</li>
+                        <li>Professional Copywriting</li>
+                        <li>Social Media Integration</li>
+                        <li>WhatsApp Chat Button</li>
+                        <li>7-10 Days Delivery</li>
+                    </ul>
+                    <a href="https://wa.me/918850777453?text=Interested%20in%20Growth%20Engine%20Package"
+                        class="pricing-btn">Select Popular</a>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="pricing-card">
+                    <span class="pricing-tier">Market Leader</span>
+                    <div class="pricing-price">₹59,999<span>+GST</span></div>
+                    <ul class="pricing-features">
+                        <li><strong>Everything in Growth</strong></li>
+                        <li>Full Customization</li>
+                        <li>Marketing Suite Setup</li>
+                        <li>Analytics Dashboard</li>
+                        <li>Payment Gateway Integration</li>
+                        <li>1 Month Priority Support</li>
+                    </ul>
+                    <a href="https://wa.me/918850777453?text=Interested%20in%20Market%20Leader%20Package"
+                        class="pricing-btn">Go Enterprise</a>
+                </div>
+            </div>
+
+            <h2 class="section-title">Power-Up Add-ons</h2>
+            <div class="addons-grid">
+                <div class="addon-item">
+                    <div class="addon-icon">🎨</div>
+                    <div class="addon-info">
+                        <h4>Logo Design</h4>
+                        <p>₹5,000</p>
+                    </div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-icon">📍</div>
+                    <div class="addon-info">
+                        <h4>GMB Optimization</h4>
+                        <p>₹3,500</p>
+                    </div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-icon">✍️</div>
+                    <div class="addon-info">
+                        <h4>Content Writing</h4>
+                        <p>₹1,500 / page</p>
+                    </div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-icon">📱</div>
+                    <div class="addon-info">
+                        <h4>Social Media Kit</h4>
+                        <p>₹4,500</p>
+                    </div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-icon">🤖</div>
+                    <div class="addon-info">
+                        <h4>Chatbot Setup</h4>
+                        <p>₹6,000</p>
+                    </div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-icon">⚡</div>
+                    <div class="addon-info">
+                        <h4>Speed Guarantee</h4>
+                        <p>₹3,000</p>
+                    </div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-icon">🔄</div>
+                    <div class="addon-info">
+                        <h4>Maintenance</h4>
+                        <p>₹1,999 / mo</p>
+                    </div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-icon">🌐</div>
+                    <div class="addon-info">
+                        <h4>Domain (1 Yr)</h4>
+                        <p>₹1,500</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 80px 40px 40px;">
+                <h2 class="section-title"
+                    style="text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 36px; margin-bottom: 50px; background: linear-gradient(135deg, #fff, #a5b4fc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                    Get In Touch</h2>
+
+                <div class="contact-wrapper"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 60px;">
+                    <div class="contact-info"
+                        style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px;">
+                        <h3
+                            style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; margin-bottom: 20px; color: #00CEC9;">
+                            Contact Information</h3>
+
+                        <div class="contact-item" style="margin-bottom: 20px;">
+                            <h4 style="color: #A29BFE; margin-bottom: 5px;">Email</h4>
+                            <p style="color: var(--text-muted);"><a href="mailto:admin@abetworks.in"
+                                    style="color: var(--text-muted);">admin@abetworks.in</a></p>
+                        </div>
+
+                        <div class="contact-item" style="margin-bottom: 20px;">
+                            <h4 style="color: #A29BFE; margin-bottom: 5px;">Phone</h4>
+                            <p style="color: var(--text-muted);"><a href="tel:+918850777453"
+                                    style="color: var(--text-muted);">+91 8850777453</a></p>
+                        </div>
+
+                        <div class="contact-item">
+                            <h4 style="color: #A29BFE; margin-bottom: 5px;">Business Hours</h4>
+                            <p style="color: var(--text-muted);">Monday - Friday: 9AM - 6PM<br>Saturday: 10AM - 4PM</p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="social-links" style="text-align: center; margin-top: 40px;">
+                        <h4 style="color: #00CEC9; margin-bottom: 20px;">Connect With Us</h4>
+                        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                            <a href="https://www.linkedin.com/company/abetworks" target="_blank"
+                                style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50%; color: #00CEC9; font-size: 20px; transition: transform 0.3s;">💼</a>
+                            <a href="https://www.instagram.com/abetworks.in" target="_blank"
+                                style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50%; color: #00CEC9; font-size: 20px; transition: transform 0.3s;">📷</a>
+                            <a href="https://www.facebook.com/@abetworks" target="_blank"
+                                style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50%; color: #00CEC9; font-size: 20px; transition: transform 0.3s;">📘</a>
+                            <a href="https://www.x.com/@abetworks" target="_blank"
+                                style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50%; color: #00CEC9; font-size: 20px; transition: transform 0.3s;">🐦</a>
+                            <a href="https://www.youtube.com/@abetworks" target="_blank"
+                                style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50%; color: #00CEC9; font-size: 20px; transition: transform 0.3s;">📺</a>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container"
+                style="max-width: 1400px; margin: 0 auto; padding: 40px 40px 20px; text-align: center;">
+                <div class="footer-brand" style="margin-bottom: 20px;">
+                    <h3
+                        style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; margin-bottom: 10px; background: linear-gradient(135deg, #667EEA, #00CEC9); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                        AbetWorks</h3>
+                    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Transforming ideas into
+                        innovative digital experiences</p>
+                </div>
+
+                <div class="footer-links"
+                    style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
+                    <a href="#pricing" style="color: var(--text-muted); transition: color 0.3s;">Packages</a>
+                    <a href="mailto:hello@abetworks.in"
+                        style="color: var(--text-muted); transition: color 0.3s;">Contact</a>
+                    <a href="#" style="color: var(--text-muted); transition: color 0.3s;">Services</a>
+                    <a href="#" style="color: var(--text-muted); transition: color 0.3s;">Portfolio</a>
+                    <a href="#" style="color: var(--text-muted); transition: color 0.3s;">About</a>
+                </div>
+
+                <div class="footer-bottom"
+                    style="border-top: 1px solid var(--glass-border); padding-top: 20px; margin-top: 20px;">
+                    <p class="footer-text" style="color: var(--text-muted); font-size: 14px;">© 2023 AbetWorks. All
+                        rights reserved.</p>
+                    <p class="footer-text" style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Premium
+                        Templates by <a href="https://abetworks.in" style="color: #00CEC9;">AbetWorks</a> • All designs
+                        include animations & responsive layouts</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Efficient Staggered Animation
+        const cards = document.querySelectorAll('.template-card');
+        if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Use CSS class instead of inline styles for better performance
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+
+            cards.forEach((card, i) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s`; // Stagger via transition-delay
+                observer.observe(card);
+            });
+        }
+
+        // Contact form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const subject = this.querySelectorAll('input[type="text"]')[1].value;
+            const message = this.querySelector('textarea').value;
+
+            // In a real implementation, you would send this data to a server
+            // For now, we'll just show an alert
+            alert(`Thank you ${name}! Your message has been sent. We'll get back to you at ${email} soon.`);
+
+            // Reset the form
+            this.reset();
+        });
+    </script>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/918850777453" target="_blank"
+        style="position: fixed; bottom: 24px; right: 24px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); z-index: 1000; transition: transform 0.3s ease, box-shadow 0.3s ease; text-decoration: none;"
+        aria-label="Chat with us on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="white">
+            <path
+                d="M17.472 14.387c-.31-.155-1.759-.87-2.03-.976-.27-.105-.464-.154-.658.154-.194.31-.741.976-.91.77-.17-.206-.658-.976-1.613-1.943-.956-.967-1.612-1.624-1.943-1.943-.33-.31-.154-.464.155-.658.31-.194.976-.741.77-.91-.206-.17-.976-.658-1.943-1.613-.967-.955-1.624-1.612-1.943-1.943-.31-.33-.464-.154-.658.155-.194.31-.741.976-.976.976-.235 0-.415-.194-.658-.154-.243.04-.741.104-1.155.414-.414.31-.976.976-.976 2.34 0 1.364 1.04 2.404 2.404 3.444 1.364 1.04 2.404 1.04 3.444 0 .521-.521 1.291-.976 2.247-.976.955 0 1.725.455 2.247.976.521.521.976 1.291.976 2.247 0 .955-.455 1.725-.976 2.247z" />
+            <path
+                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 17.545c-.366.498-.89.89-1.571 1.156-.68.265-1.42.398-2.219.398-7.305 0-12.667-5.88-12.667-12.667 0-.798.133-1.538.398-2.218.266-.68.658-1.204 1.156-1.57L5.999 7.001c-.265.366-.498.764-.69 1.19-.192.426-.342.874-.449 1.344-.107.47-.17 1.174-.17 2.112 0 3.58 2.64 6.506 6.001 6.506.798 0 1.464-.17 2.0-.51.536-.34 1.006-.81 1.41-1.41.404-.6.738-1.298.998-2.098.26-.8.41-1.66.41-2.58 0-.47-.05-.89-.15-1.26-.1-.37-.23-.69-.39-.96-.16-.27-.35-.49-.57-.66-.22-.17-.47-.26-.75-.26-.13 0-.26.02-.39.06-.13.04-.25.1-.36.18-.11.08-.21.18-.3.3-.09.12-.17.26-.23.42-.06.16-.1.34-.12.54-.02.2-.03.42-.03.66 0 .47.08.89.24 1.26.16.37.39.69.69.96.3.27.66.49 1.08.66.42.17.9.26 1.44.26.54 0 1.02-.09 1.44-.26.42-.17.78-.39 1.08-.66.3-.27.54-.59.72-.96.18-.37.3-.79.36-1.26.06-.47.09-.99.09-1.56 0-1.38-.34-2.59-1.02-3.63-.68-1.04-1.62-1.86-2.82-2.46-1.2-.6-2.58-.9-4.14-.9-1.56 0-2.94.3-4.14.9-1.2.6-2.14 1.42-2.82 2.46-.68 1.04-1.02 2.25-1.02 3.63 0 1.38.34 2.59 1.02 3.63.68 1.04 1.62 1.86 2.82 2.46 1.2.6 2.58.9 4.14.9 1.56 0 2.94-.3 4.14-.9.48-.24.9-.54 1.26-.9.36-.36.66-.78.9-1.26.24-.48.42-1.02.54-1.62.12-.6.18-1.26.18-1.98 0-.66-.06-1.26-.18-1.8-.12-.54-.3-.102-.54-1.62-.24-.54-.54-1.02-.9-1.44-.36-.42-.78-.78-1.26-1.08-.48-.3-.96-.54-1.44-.72-.48-.18-.96-.3-1.44-.36-.48-.06-.96-.09-1.44-.09z" />
+        </svg>
+    </a>
+</body>
+
+</html>
