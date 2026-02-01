@@ -1,1 +1,10 @@
-{\n  "name": "abetworks-premium-templates",\n  "version": "1.0.0",\n  "description": "A collection of premium website templates by AbetWorks",\n  "main": "index.html",\n  "scripts": {\n    "dev": "serve .",\n    "start": "serve ."\n  },\n  "keywords": [\n    "templates",\n    "websites",\n    "design",\n    "frontend",\n    "static"\n  ],\n  "author": "AbetWorks",\n  "license": "ISC",\n  "dependencies": {\n    "serve": "14.2.0"\n  }\n}
+{
+  "name": "abetworks-premium-templates",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A collection of premium website templates by AbetWorks",
+  "license": "ISC",
+  "engines": {
+    "node": "18.x"
+  }
+}
